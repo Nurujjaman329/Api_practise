@@ -31,6 +31,34 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          "Api_Practise",
+          textAlign: TextAlign.center,
+        ),
+      ),
+      body: Column(
+        children: [
+          Expanded(
+            child: FutureBuilder(
+              future: getpostApi(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return const Text("Loading");
+                } else {
+                  return ListView.builder(
+                    itemCount: user.length,
+                    itemBuilder: (context, index) {
+                      return Text(index.toString());
+                    },
+                  );
+                }
+              },
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
