@@ -50,7 +50,39 @@ class _HomePageState extends State<HomePage> {
                   return ListView.builder(
                     itemCount: user.length,
                     itemBuilder: (context, index) {
-                      return Text(index.toString());
+                      return Card(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * .20,
+                                  child: CircleAvatar(
+                                    child: Text(
+                                      user[index].id.toString(),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * .70,
+                                  child: Text(
+                                    user[index].title.toString(),
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Text(
+                              user[index].body.toString(),
+                            ),
+                          ],
+                        ),
+                      );
                     },
                   );
                 }
