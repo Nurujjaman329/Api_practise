@@ -1,43 +1,133 @@
 // To parse this JSON data, do
 //
-//     final welcome = welcomeFromJson(jsonString);
+//     final users = usersFromJson(jsonString);
 
 import 'dart:convert';
 
-List<Welcome> welcomeFromJson(String str) =>
-    List<Welcome>.from(json.decode(str).map((x) => Welcome.fromJson(x)));
+List<Users> usersFromJson(String str) =>
+    List<Users>.from(json.decode(str).map((x) => Users.fromJson(x)));
 
-String welcomeToJson(List<Welcome> data) =>
+String usersToJson(List<Users> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class Welcome {
-  int? albumId;
+class Users {
   int? id;
-  String? title;
-  String? url;
-  String? thumbnailUrl;
+  String? name;
+  String? username;
+  String? email;
+  Address? address;
+  String? phone;
+  String? website;
+  Company? company;
 
-  Welcome({
-    this.albumId,
+  Users({
     this.id,
-    this.title,
-    this.url,
-    this.thumbnailUrl,
+    this.name,
+    this.username,
+    this.email,
+    this.address,
+    this.phone,
+    this.website,
+    this.company,
   });
 
-  factory Welcome.fromJson(Map<dynamic, dynamic> json) => Welcome(
-        albumId: json["albumId"],
+  factory Users.fromJson(Map<dynamic, dynamic> json) => Users(
         id: json["id"],
-        title: json["title"],
-        url: json["url"],
-        thumbnailUrl: json["thumbnailUrl"],
+        name: json["name"],
+        username: json["username"],
+        email: json["email"],
+        address:
+            json["address"] == null ? null : Address.fromJson(json["address"]),
+        phone: json["phone"],
+        website: json["website"],
+        company:
+            json["company"] == null ? null : Company.fromJson(json["company"]),
       );
 
   Map<String, dynamic> toJson() => {
-        "albumId": albumId,
         "id": id,
-        "title": title,
-        "url": url,
-        "thumbnailUrl": thumbnailUrl,
+        "name": name,
+        "username": username,
+        "email": email,
+        "address": address?.toJson(),
+        "phone": phone,
+        "website": website,
+        "company": company?.toJson(),
+      };
+}
+
+class Address {
+  String? street;
+  String? suite;
+  String? city;
+  String? zipcode;
+  Geo? geo;
+
+  Address({
+    this.street,
+    this.suite,
+    this.city,
+    this.zipcode,
+    this.geo,
+  });
+
+  factory Address.fromJson(Map<String, dynamic> json) => Address(
+        street: json["street"],
+        suite: json["suite"],
+        city: json["city"],
+        zipcode: json["zipcode"],
+        geo: json["geo"] == null ? null : Geo.fromJson(json["geo"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "street": street,
+        "suite": suite,
+        "city": city,
+        "zipcode": zipcode,
+        "geo": geo?.toJson(),
+      };
+}
+
+class Geo {
+  String? lat;
+  String? lng;
+
+  Geo({
+    this.lat,
+    this.lng,
+  });
+
+  factory Geo.fromJson(Map<String, dynamic> json) => Geo(
+        lat: json["lat"],
+        lng: json["lng"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "lat": lat,
+        "lng": lng,
+      };
+}
+
+class Company {
+  String? name;
+  String? catchPhrase;
+  String? bs;
+
+  Company({
+    this.name,
+    this.catchPhrase,
+    this.bs,
+  });
+
+  factory Company.fromJson(Map<String, dynamic> json) => Company(
+        name: json["name"],
+        catchPhrase: json["catchPhrase"],
+        bs: json["bs"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "name": name,
+        "catchPhrase": catchPhrase,
+        "bs": bs,
       };
 }
