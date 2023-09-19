@@ -77,8 +77,11 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ],
                             ),
-                            Text(
-                              user[index].body.toString(),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                user[index].body.toString(),
+                              ),
                             ),
                           ],
                         ),

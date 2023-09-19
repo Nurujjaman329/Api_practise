@@ -1,4 +1,4 @@
-import 'package:api_practise/homepage.dart';
+import 'package:api_practise/self_class.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      home: SelfClass(),
     );
   }
 }
