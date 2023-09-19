@@ -12,16 +12,16 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<Users> user = [];
+  List<Welcome> user = [];
 
-  Future<List<Users>> getpostApi() async {
+  Future<List<Welcome>> getpostApi() async {
     final response =
         await http.get(Uri.parse("https://jsonplaceholder.typicode.com/posts"));
     var data = jsonDecode(response.body.toString());
 
     if (response.statusCode == 200) {
       for (Map i in data) {
-        user.add(Users.fromJson(i));
+        user.add(Welcome.fromJson(i));
       }
       return user;
     } else {
@@ -80,7 +80,7 @@ class _HomePageState extends State<HomePage> {
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Text(
-                                user[index].body.toString(),
+                                user[index].title.toString(),
                               ),
                             ),
                           ],

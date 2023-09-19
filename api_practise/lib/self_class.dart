@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:api_practise/model.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -11,8 +12,8 @@ class SelfClass extends StatefulWidget {
 }
 
 class _SelfClassState extends State<SelfClass> {
-  List<Photos> photoList = [];
-  Future<List<Photos>> getPhotos() async {
+  List<Welcome> photoList = [];
+  Future<List<Welcome>> getPhotos() async {
     final response = await http.get(
       Uri.parse("https://jsonplaceholder.typicode.com/photos"),
     );
@@ -22,11 +23,7 @@ class _SelfClassState extends State<SelfClass> {
 
     if (response.statusCode == 200) {
       for (Map i in data) {
-        Photos photos = Photos(
-          title: i["title"],
-          url: i["url"],
-        );
-        photoList.add(photos);
+        photoList.add(Welcome.fromJson(i));
       }
       return photoList;
     } else {
@@ -57,7 +54,7 @@ class _SelfClassState extends State<SelfClass> {
                             backgroundImage: NetworkImage(
                                 snapshot.data![index].url.toString()),
                           ),
-                          title: Text(snapshot.data![index].title.toString()),
+                          title: Text(photoList[index].title.toString()),
                         );
                       });
                 }),
@@ -68,8 +65,9 @@ class _SelfClassState extends State<SelfClass> {
   }
 }
 
-class Photos {
-  String title, url;
+//class Photos {
+//  String title, url;
+//  int id;
 
-  Photos({required this.title, required this.url});
-}
+//  Photos({required this.title, required this.url});
+//}
