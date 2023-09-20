@@ -57,6 +57,13 @@ class _StartWithObjectState extends State<StartWithObject> {
                                   .toString(),
                             ),
                           ),
+                          trailing: SizedBox(
+                            width: MediaQuery.of(context).size.width * .20,
+                            child: Text(
+                              snapshot.data!.articles![index].publishedAt
+                                  .toString(),
+                            ),
+                          ),
                         ),
                         SizedBox(
                           height: MediaQuery.of(context).size.height * .011,
