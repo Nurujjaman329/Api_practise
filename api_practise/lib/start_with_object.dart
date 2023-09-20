@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:api_practise/datapass.dart';
 import 'package:api_practise/start_with_object_model.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -43,25 +44,38 @@ class _StartWithObjectState extends State<StartWithObject> {
                   itemBuilder: (context, index) {
                     return Column(
                       children: [
-                        ListTile(
-                          title: Text(
-                            snapshot.data!.articles![index].source!.name
-                                .toString(),
-                          ),
-                          subtitle: Text(
-                            snapshot.data!.articles![index].title.toString(),
-                          ),
-                          leading: CircleAvatar(
-                            backgroundImage: NetworkImage(
-                              snapshot.data!.articles![index].urlToImage
+                        InkWell(
+                          onTap: () {
+                            // Datapass from one page to another page
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => DataPass(
+                                  data: snapshot.data!.articles![index],
+                                ),
+                              ),
+                            );
+                          },
+                          child: ListTile(
+                            title: Text(
+                              snapshot.data!.articles![index].source!.name
                                   .toString(),
                             ),
-                          ),
-                          trailing: SizedBox(
-                            width: MediaQuery.of(context).size.width * .20,
-                            child: Text(
-                              snapshot.data!.articles![index].publishedAt
-                                  .toString(),
+                            subtitle: Text(
+                              snapshot.data!.articles![index].title.toString(),
+                            ),
+                            leading: CircleAvatar(
+                              backgroundImage: NetworkImage(
+                                snapshot.data!.articles![index].urlToImage
+                                    .toString(),
+                              ),
+                            ),
+                            trailing: SizedBox(
+                              width: MediaQuery.of(context).size.width * .20,
+                              child: Text(
+                                snapshot.data!.articles![index].publishedAt
+                                    .toString(),
+                              ),
                             ),
                           ),
                         ),
