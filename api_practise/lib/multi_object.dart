@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'dart:convert';
 
 import 'package:api_practise/model.dart';
@@ -36,46 +38,45 @@ class _MultiObjectState extends State<MultiObject> {
       appBar: AppBar(
         title: const Text("Multi_Object"),
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: FutureBuilder(
-              future: getusersApi(),
-              builder: ((context, snapshot) {
-                return ListView.builder(
-                    itemCount: userList.length,
-                    itemBuilder: (context, index) {
-                      if (!snapshot.hasData) {
-                        return const CircularProgressIndicator();
-                      } else {
-                        return Card(
-                          child: Column(
-                            children: [
-                              ReUseableRow(
-                                title: "Name",
-                                value: snapshot.data![index].name.toString(),
-                              ),
-                              ReUseableRow(
-                                title: "Email",
-                                value: snapshot.data![index].email.toString(),
-                              ),
-                              ReUseableRow(
-                                title: "Name",
-                                value: snapshot.data![index].name.toString(),
-                              ),
-                              ReUseableRow(
-                                title: "Name",
-                                value: snapshot.data![index].name.toString(),
-                              ),
-                            ],
-                          ),
-                        );
-                      }
-                    });
-              }),
-            ),
-          ),
-        ],
+      body: FutureBuilder(
+        future: getusersApi(),
+        builder: ((context, snapshot) {
+          return ListView.builder(
+              itemCount: userList.length,
+              itemBuilder: (context, index) {
+                if (!snapshot.hasData) {
+                  return const CircularProgressIndicator();
+                } else {
+                  return Card(
+                    child: Column(
+                      children: [
+                        ReUseableRow(
+                          title: "Name",
+                          value: snapshot.data![index].name.toString(),
+                        ),
+                        ReUseableRow(
+                          title: "Email",
+                          value: snapshot.data![index].email.toString(),
+                        ),
+                        ReUseableRow(
+                          title: "UserName",
+                          value: snapshot.data![index].username.toString(),
+                        ),
+                        ReUseableRow(
+                          title: "Name",
+                          value: snapshot.data![index].address!.geo!.lat
+                              .toString(),
+                        ),
+                        ReUseableRow(
+                          title: "Email",
+                          value: snapshot.data![index].company!.name.toString(),
+                        ),
+                      ],
+                    ),
+                  );
+                }
+              });
+        }),
       ),
     );
   }
@@ -90,14 +91,24 @@ class ReUseableRow extends StatelessWidget {
     return Row(
       children: [
         SizedBox(
-            width: MediaQuery.of(context).size.width * .20,
-            child: Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Text(title),
-            )),
+          width: MediaQuery.of(context).size.width * .25,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: [
+                Text(title),
+              ],
+            ),
+          ),
+        ),
         SizedBox(
           width: MediaQuery.of(context).size.width * .70,
-          child: Text(value),
+          child: Row(
+            children: [
+              Text(":   "),
+              Text(value),
+            ],
+          ),
         ),
       ],
     );
