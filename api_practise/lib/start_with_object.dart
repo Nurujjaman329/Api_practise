@@ -43,15 +43,26 @@ class _StartWithObjectState extends State<StartWithObject> {
                   itemBuilder: (context, index) {
                     return Column(
                       children: [
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height * .1,
-                          width: MediaQuery.of(context).size.width * .7,
-                          child: Text(
+                        ListTile(
+                          title: Text(
+                            snapshot.data!.articles![index].source!.name
+                                .toString(),
+                          ),
+                          subtitle: Text(
                             snapshot.data!.articles![index].title.toString(),
                           ),
+                          leading: CircleAvatar(
+                            backgroundImage: NetworkImage(
+                              snapshot.data!.articles![index].urlToImage
+                                  .toString(),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * .011,
                         ),
                         Container(
-                          height: MediaQuery.of(context).size.height * .2,
+                          height: MediaQuery.of(context).size.height * .8 / 3.4,
                           //width: MediaQuery.of(context).size.width * 10,
                           decoration: BoxDecoration(
                             image: DecorationImage(
@@ -62,22 +73,6 @@ class _StartWithObjectState extends State<StartWithObject> {
                             ),
                           ),
                         ),
-
-                        //ListView.builder(
-                        //    itemCount: snapshot.data!.articles.,
-                        //    itemBuilder: (context, index) {
-                        //      return Container(
-                        //        height: MediaQuery.of(context).size.height * .3,
-                        //        width: MediaQuery.of(context).size.width * .2,
-                        //        decoration: BoxDecoration(
-                        //          image: DecorationImage(
-                        //            image: NetworkImage(
-                        //              snapshot.data!.articles!.toString(),
-                        //            ),
-                        //          ),
-                        //        ),
-                        //      );
-                        //    }),
                       ],
                     );
                   });
