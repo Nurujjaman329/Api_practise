@@ -105,7 +105,7 @@ class ReUseableRow extends StatelessWidget {
           width: MediaQuery.of(context).size.width * .70,
           child: Row(
             children: [
-              Text(":   "),
+              const Text(":   "),
               Text(value),
             ],
           ),
