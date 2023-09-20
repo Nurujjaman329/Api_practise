@@ -37,17 +37,53 @@ class _StartWithObjectState extends State<StartWithObject> {
       body: FutureBuilder<StartWithObj>(
           future: getApi(),
           builder: (context, snapshot) {
-            return ListView.builder(
-                itemCount: snapshot.data!.articles!.length,
-                itemBuilder: (context, index) {
-                  return Column(
-                    children: [
-                      Text(
-                        index.toString(),
-                      ),
-                    ],
-                  );
-                });
+            if (snapshot.hasData) {
+              return ListView.builder(
+                  itemCount: snapshot.data!.articles!.length,
+                  itemBuilder: (context, index) {
+                    return Column(
+                      children: [
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * .1,
+                          width: MediaQuery.of(context).size.width * .7,
+                          child: Text(
+                            snapshot.data!.articles![index].title.toString(),
+                          ),
+                        ),
+                        Container(
+                          height: MediaQuery.of(context).size.height * .2,
+                          //width: MediaQuery.of(context).size.width * 10,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: NetworkImage(
+                                  snapshot.data!.articles![index].urlToImage
+                                      .toString(),
+                                  scale: 1),
+                            ),
+                          ),
+                        ),
+
+                        //ListView.builder(
+                        //    itemCount: snapshot.data!.articles.,
+                        //    itemBuilder: (context, index) {
+                        //      return Container(
+                        //        height: MediaQuery.of(context).size.height * .3,
+                        //        width: MediaQuery.of(context).size.width * .2,
+                        //        decoration: BoxDecoration(
+                        //          image: DecorationImage(
+                        //            image: NetworkImage(
+                        //              snapshot.data!.articles!.toString(),
+                        //            ),
+                        //          ),
+                        //        ),
+                        //      );
+                        //    }),
+                      ],
+                    );
+                  });
+            } else {
+              return const Text("Loading");
+            }
           }),
     );
   }
