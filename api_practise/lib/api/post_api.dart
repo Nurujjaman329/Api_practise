@@ -17,7 +17,7 @@ class _PostApiState extends State<PostApi> {
   void Login(String email, password) async {
     try {
       Response response = await post(
-        Uri.parse("https://reqres.in/api/register"),
+        Uri.parse("https://reqres.in/api/login"),
         body: {
           'email': email,
           'password': password,
@@ -27,7 +27,7 @@ class _PostApiState extends State<PostApi> {
         var data = jsonDecode(
           response.body.toString(),
         );
-        print(data["id"]);
+        print(data["token"]);
         print("Account Create Successful");
       } else {
         print("Failed");

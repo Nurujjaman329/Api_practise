@@ -1,4 +1,4 @@
-import 'package:api_practise/api/post_api.dart';
+import 'package:api_practise/api/pick_image.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      home: PostApi(),
+      home: PickImages(),
     );
   }
 }
